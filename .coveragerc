@@ -1,0 +1,3 @@
+[run]
+omit =
+    ecommerce/main.py

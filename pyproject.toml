@@ -6,7 +6,7 @@ authors = [
     {name = "Bergsmf",email = "bergsmf@outlook.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.13,<4.0"
 dependencies = [
     "pandas (>=2.2.3,<3.0.0)",
     "duckdb (>=1.3.0,<2.0.0)"
@@ -18,7 +18,37 @@ packages = [{include = "ecommerce", from = "src"}]
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.29.5"
+pytest = "^8.4.0"
+pytest-cov = "^6.1.1"
+ruff = "^0.11.12"
+taskipy = "^1.14.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ['migrations']
+
+[tool.ruff.lint]
+preview = true
+select = ['I', 'F', 'E', 'W', 'PL', 'PT']
+
+[tool.ruff.format]
+preview = true
+quote-style = 'single'
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = '-p no:warnings'
+
+
+[tool.taskipy.tasks]
+lint = 'ruff check'
+pre_format = 'ruff check --fix'
+format = 'ruff format'
+run = 'ecommerce/main.py'
+pre_test = 'task lint'
+test = 'pytest -s -x --cov=ecommerce -vv'
+post_test = 'coverage html'
