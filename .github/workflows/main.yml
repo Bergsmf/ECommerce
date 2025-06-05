@@ -1,0 +1,32 @@
+name: Python CI
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.11.3
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.13.2"
+
+      - name: Instalar Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Instalar dependências com Poetry
+        run: |
+          poetry install
+
+      - name: Rodar lint com Ruff via Taskipy
+        run: |
+          poetry run task lint
+
+      - name: Rodar testes com cobertura
+        run: |
+          poetry run task test
