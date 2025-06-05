@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "ecommerce", from = "src"}]
+packages = [{include = "ecommerce"}]
 
 
 [tool.poetry.group.dev.dependencies]
