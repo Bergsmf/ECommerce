@@ -1,13 +1,14 @@
 from pipeline.extract import ReadSells
 
 
-def main():
-    file_path = 'data/ecommerce-data.csv'
+def le_arquivo():
+    file_path = 'data/src/ecommerce-data.csv'
+    error_path = 'data/error/error_ecommerce.csv'
+    valid_path = 'data/temp/temp_ecommerce.csv'
     sells = ReadSells()
     sells.read_file(file_path)
-    return True
+    sells.validade_file(valid_path, error_path)
 
 
 if __name__ == '__main__':
-    main()
-    print('Testa CI')
+    le_arquivo()
