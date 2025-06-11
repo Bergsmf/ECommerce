@@ -1,6 +1,7 @@
 import pandera.pandas as pa
 from pandera.typing import Series
 
+
 class SalesSchema(pa.DataFrameModel):
     InvoiceNo: Series[int]
     StockCode: Series[str]
