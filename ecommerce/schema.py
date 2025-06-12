@@ -1,5 +1,5 @@
 import pandera.pandas as pa
-from pandera.typing import Series
+from pandera.typing import Index, Series
 
 
 class SalesSchema(pa.DataFrameModel):
@@ -9,5 +9,10 @@ class SalesSchema(pa.DataFrameModel):
     Quantity: Series[int]
     InvoiceDate: Series[pa.DateTime]
     UnitPrice: Series[float]
-    CustomerID: Series[int]
+    CustomerID: Series[int] = pa.Field(nullable=True)
     Country: Series[str]
+    index: Index[int]
+
+    class Config:
+        coerce = True
+        strict = True

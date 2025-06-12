@@ -6,5 +6,6 @@ class Extract:
         self.df = None
         self.file_path = file_path
 
-    def read_file(self):
+    def read_file(self) -> pd.DataFrame:
         self.df = pd.read_csv(self.file_path, encoding='ISO-8859-1')
+        return self.df
