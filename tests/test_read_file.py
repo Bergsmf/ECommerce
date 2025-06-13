@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from ecommerce.main import extract_file, validate_sales
+from ecommerce.main import extract_file, total_sales, validate_sales
 
 
 @pytest.fixture
@@ -23,10 +23,7 @@ def temp_csv(tmp_path):
     return df, temp_file
 
 
-def structure(rows: int, columns: int):
-    expected_rows = rows
-    expected_columns = columns
-
+def structure(rows: int, extra_column: int = 0):
     column_names = [
         'InvoiceNo',
         'StockCode',
@@ -37,13 +34,18 @@ def structure(rows: int, columns: int):
         'CustomerID',
         'Country',
     ]
+    extra_columns = {0: [], 1: ['Total', 'MonthSale']}
 
-    return expected_rows, expected_columns, column_names
+    full_column_names = column_names + extra_columns.get(extra_column, [])
+    expected_rows = rows
+    expected_columns = len(full_column_names)
+
+    return expected_rows, expected_columns, full_column_names
 
 
 def test_extract_file(temp_csv):
     # Arrange
-    expected_rows, expected_columns, column_names = structure(2, 8)
+    expected_rows, expected_columns, column_names = structure(2)
     file = temp_csv[1]
 
     # Act
@@ -60,7 +62,7 @@ def test_extract_file(temp_csv):
 
 def test_validate_sales(temp_csv):
     # Arrange
-    expected_rows, expected_columns, column_names = structure(1, 8)
+    expected_rows, expected_columns, column_names = structure(1)
     df = temp_csv[0]
 
     # Act
@@ -70,5 +72,28 @@ def test_validate_sales(temp_csv):
     # Assert
     assert list(df_clean.columns) == column_names
     assert isinstance(df_clean, pd.DataFrame)
+    assert rows == expected_rows
+    assert cols == expected_columns
+
+
+def test_total_sales(temp_csv):
+    # Arrange
+    expected_rows, expected_columns, column_names = structure(1, 1)
+    df = temp_csv[0]
+
+    # Act
+    df_clean = validate_sales(df)
+    df_total = total_sales(df_clean)
+    rows, cols = df_total.shape
+
+    # Assert
+    assert list(df_total.columns) == column_names
+    assert isinstance(df_total, pd.DataFrame)
+    assert df_total['Total'].equals(
+        df_total['Quantity'] * df_total['UnitPrice']
+    )
+    assert df_total['MonthSale'].equals(
+        df_total['InvoiceDate'].dt.to_period('M').dt.to_timestamp()
+    )
     assert rows == expected_rows
     assert cols == expected_columns

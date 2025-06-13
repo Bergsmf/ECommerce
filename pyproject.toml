@@ -33,7 +33,7 @@ preview = true
 quote-style = 'single'
 
 [tool.pytest.ini_options]
-pythonpath = "."
+pythonpath = "./ecommerce"
 addopts = '-p no:warnings'
 
 [tool.taskipy.tasks]
