@@ -26,6 +26,27 @@ Utilizei um [dataset](https://www.kaggle.com/datasets/carrie1/ecommerce-data) de
 ### 4. Visualização de Dados:
 - Foi utilizado o Streamlit para a visualização dos dados:
 
+### CI
+- A branche main foi bloqueada para push. Utilizo a branche develop e pull request. Além de uma etapa de CI:
+
+### Taskipy
+
+COloquei no projeto o taskipy para facilitar a execução de comandos comuns durante o desenvolvimento. Abaixo estão as tarefas disponíveis:
+
+poetry run task <nome_da_tarefa>
+Tarefas disponíveis
+| Tarefa | Descrição |
+| --- | --- |
+| lint | Executa o linter ruff para verificar problemas de formatação e estilo. |
+| pre_format | Corrige automaticamente problemas detectados pelo ruff. |
+| format | Aplica o estilo de formatação definido (ruff format). |
+| pre_run | Executa o script main.py para processar e carregar os dados. |
+| run | Inicia a aplicação com Streamlit (ecommerce/app.py). |
+| pre_test | Executa o lint automaticamente antes dos testes. |
+| test | Executa os testes usando pytest em modo verboso. |
+
+Observação: as tarefas pre_run e pre_test são chamadas automaticamente antes das tarefas run e test, respectivamente.
+
 ## Estrutura de Diretórios
 <pre lang="markdown"><code>.
 ├── README.md                 # Documentação principal do projeto
@@ -54,12 +75,12 @@ Utilizei um [dataset](https://www.kaggle.com/datasets/carrie1/ecommerce-data) de
 ## Imagens
 
 ### Vendas no mês
-[Vendas no mês](ecommerce/img/vendas_mes.png)
+![Vendas no mês](ecommerce/img/vendas_mes.png)
 
 ### Venda mensal por país
-[Filtro país](ecommerce/img/filtro_pais_venda.png)
-[Vendas por país](ecommerce/img/venda_mensal_pais.png)
+![Filtro país](ecommerce/img/filtro_pais_venda.png)
+![Vendas por país](ecommerce/img/venda_mensal_pais.png)
 
 ### Produtos mais vendidos por mês
-[Filtro mês](ecommerce/img/filtro_mes_produtos.png)
-[Produtos mais vendidos](ecommerce/img/produtos_mais_vendidos.png)
+![Filtro mês](ecommerce/img/filtro_mes_produtos.png)
+![Produtos mais vendidos](ecommerce/img/produtos_mais_vendidos.png)
