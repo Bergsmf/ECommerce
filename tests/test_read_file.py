@@ -3,9 +3,9 @@ import pytest
 
 from ecommerce.main import (
     extract_file,
+    insert_data,
     total_sales,
     validate_sales,
-    insert_data,
     validate_valid_sales,
 )
 
@@ -104,6 +104,7 @@ def test_total_sales(temp_csv):
     assert rows == expected_rows
     assert cols == expected_columns
 
+
 def test_validate_valid_sales(temp_csv):
     # Arrange
     expected_rows, expected_columns, column_names = structure(1, 1)
@@ -126,6 +127,7 @@ def test_validate_valid_sales(temp_csv):
     )
     assert rows == expected_rows
     assert cols == expected_columns
+
 
 def test_insert_data(temp_csv):
     # Arrange
