@@ -8,6 +8,23 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.45.1-ff4b4b)
 ![Taskipy](https://img.shields.io/badge/Taskipy-1.12.0-2e7d32)
 
+## Descrição
+Utilizei um [dataset](https://www.kaggle.com/datasets/carrie1/ecommerce-data) de Ecommerce do Kaggle para este projeto, onde coloquei como objetivo a realização de um ETL para a carga no DuckDB. As etapas deste projeto foram:
+
+### 1. Leitura do arquivo:
+- O arquivo foi lido, e carregado em um dataframe utilizando Pandas;
+- O Pandera foi utilizado para validar os dados. Informações que estão fora do padrão foram descartadas;
+- Utilizei o Pytest para validar os tratamentos;
+
+### 2. Criação de novas colunas:
+- A coluna 'Total' foi criada para verificar o valor gasto naquele registro, sendo a quantidade de itens vendidos multiplicado pelo valor unitário do item;
+- A coluna 'MonthSale' é o mês daquela compra
+
+### 3. Inserção de dados:
+- A inserção dos dados é feito através do DuckDB, salvando em um arquivo: ecommerce.db
+
+### 4. Visualização de Dados:
+- Foi utilizado o Streamlit para a visualização dos dados:
 
 ## Estrutura de Diretórios
 <pre lang="markdown"><code>.
@@ -17,7 +34,9 @@
 ├── poetry.lock               # Arquivo de bloqueio de dependências
 ├── pyproject.toml            # Configuração do projeto e dependências
 ├── data/
-│   └── data.csv              # Conjunto de dados de entrada
+│   ├── data.csv              # Conjunto de dados de entrada
+│   └── pipeline/
+│       └── ecommerce.db      # Arquivo destino (Base DuckDB)
 ├── ecommerce/
 │   ├── main.py               # Script principal da aplicação
 │   ├── schema.py             # Definições de schemas e validações
@@ -31,3 +50,16 @@
     └── workflows/
         └── CI.yaml           # CI com GitHub Actions
 </code></pre>
+
+## Imagens
+
+### Vendas no mês
+[Vendas no mês](ecommerce/img/vendas_mes.png)
+
+### Venda mensal por país
+[Filtro país](ecommerce/img/filtro_pais_venda.png)
+[Vendas por país](ecommerce/img/venda_mensal_pais.png)
+
+### Produtos mais vendidos por mês
+[Filtro mês](ecommerce/img/filtro_mes_produtos.png)
+[Produtos mais vendidos](ecommerce/img/produtos_mais_vendidos.png)
