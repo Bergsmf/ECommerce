@@ -3,6 +3,7 @@ from pathlib import Path
 import pandas as pd
 import pandera.pandas as pa
 from pipeline.extract import Extract
+from pipeline.load import Load
 from pipeline.transform import Transform
 from schema import SalesSchema, SalesValidSchema
 
@@ -41,9 +42,16 @@ def validate_valid_sales(df_sales: pd.DataFrame) -> pd.DataFrame:
         return df_clean
 
 
+def insert_data(df_sales: pd.DataFrame) -> pd.DataFrame:
+    load = Load(df_sales)
+    df_sales = load.load_db()
+    return df_sales
+
+
 if __name__ == '__main__':
     file_path = Path.cwd() / 'data/data.csv'
     df_sales = extract_file(file_path)
     df_sales = validate_sales(df_sales)
     df_sales = total_sales(df_sales)
     df_sales = validate_valid_sales(df_sales)
+    df_sales = insert_data(df_sales)

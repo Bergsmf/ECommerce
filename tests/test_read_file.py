@@ -1,7 +1,13 @@
 import pandas as pd
 import pytest
 
-from ecommerce.main import extract_file, total_sales, validate_sales
+from ecommerce.main import (
+    extract_file,
+    total_sales,
+    validate_sales,
+    insert_data,
+    validate_valid_sales,
+)
 
 
 @pytest.fixture
@@ -95,5 +101,47 @@ def test_total_sales(temp_csv):
     assert df_total['MonthSale'].equals(
         df_total['InvoiceDate'].dt.to_period('M').dt.to_timestamp()
     )
+    assert rows == expected_rows
+    assert cols == expected_columns
+
+def test_validate_valid_sales(temp_csv):
+    # Arrange
+    expected_rows, expected_columns, column_names = structure(1, 1)
+    df = temp_csv[0]
+
+    # Act
+    df_clean = validate_sales(df)
+    df_total = total_sales(df_clean)
+    df_valid_total = validate_valid_sales(df_total)
+    rows, cols = df_valid_total.shape
+
+    # Assert
+    assert list(df_valid_total.columns) == column_names
+    assert isinstance(df_valid_total, pd.DataFrame)
+    assert df_valid_total['Total'].equals(
+        df_valid_total['Quantity'] * df_valid_total['UnitPrice']
+    )
+    assert df_valid_total['MonthSale'].equals(
+        df_valid_total['InvoiceDate'].dt.to_period('M').dt.to_timestamp()
+    )
+    assert rows == expected_rows
+    assert cols == expected_columns
+
+def test_insert_data(temp_csv):
+    # Arrange
+    expected_rows, expected_columns, column_names = structure(1, 1)
+    df = temp_csv[0]
+
+    # Act
+    df_clean = validate_sales(df)
+    df_total = total_sales(df_clean)
+    df_valid_total = validate_valid_sales(df_total)
+    df_inserted = insert_data(df_valid_total)
+    rows, cols = df_inserted.shape
+
+    # Assert
+    assert list(df_inserted.columns) == column_names
+    assert isinstance(df_inserted, pd.DataFrame)
+    assert df_valid_total.equals(df_inserted)
     assert rows == expected_rows
     assert cols == expected_columns
