@@ -1,12 +1,13 @@
 # ECommerce
+![Python](https://img.shields.io/badge/Python-3.10%2B-2a9d8f)
+![DuckDB](https://img.shields.io/badge/DuckDB-1.3.0-264653)
+![Pandas](https://img.shields.io/badge/Pandas-2.3.0-e9c46a)
+![Pandera](https://img.shields.io/badge/Pandera-0.24.0-f4a261)
+![Pytest](https://img.shields.io/badge/Pytest-8.4.0-e76f51)
+![Ruff](https://img.shields.io/badge/Ruff-0.11.13-8a4fff)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.45.1-ff4b4b)
+![Taskipy](https://img.shields.io/badge/Taskipy-1.12.0-2e7d32)
 
-![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Pytest](https://img.shields.io/badge/Pytest-8.4.0-990000)
-![Ruff](https://img.shields.io/badge/Ruff-0.11.13-880088)
-![Pandas](https://img.shields.io/badge/Pandas-2.3.0-yellow)
-![Pandera](https://img.shields.io/badge/Pandera-0.24.0-orange)
-![Taskipy](https://img.shields.io/badge/Taskipy-8.4.0-green)
-![DuckDB](https://img.shields.io/badge/DuckDB-1.3.0-white)
 
 ## Estrutura de Diretórios
 <pre lang="markdown"><code>.
