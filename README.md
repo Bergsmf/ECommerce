@@ -27,11 +27,11 @@ Utilizei um [dataset](https://www.kaggle.com/datasets/carrie1/ecommerce-data) de
 - Foi utilizado o Streamlit para a visualização dos dados:
 
 ### CI
-- A branche main foi bloqueada para push. Utilizo a branche develop e pull request. Além de uma etapa de CI:
+- A branch main foi bloqueada para push. Utilizo a branch develop e pull request. Além de uma etapa de CI:
 
 ### Taskipy
 
-COloquei no projeto o taskipy para facilitar a execução de comandos comuns durante o desenvolvimento. Abaixo estão as tarefas disponíveis:
+Coloquei no projeto o taskipy para facilitar a execução de comandos comuns durante o desenvolvimento. Abaixo estão as tarefas disponíveis:
 
 poetry run task <nome_da_tarefa>
 Tarefas disponíveis
